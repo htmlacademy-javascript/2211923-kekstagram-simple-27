@@ -1,20 +1,10 @@
 /**
- * Функция проверяет, что число не является отрицательным.
- * Значение должно быть конечным.
+ * Функция проверяет валидность числа.
+ * Объект должен быть конечным числом.
  * @param {Number} number проверяемое число
- * @returns является ли число положительным
+ * @returns является ли number числом
  */
-const isNotNegativeNumber = (number) => {
-  if (typeof number !== 'number') {
-    throw Error(`Параметр не является числом: ${number}`);
-  }
-
-  if (!Number.isFinite(number)) {
-    throw Error(`Число не является конечным: ${number}`);
-  }
-
-  return number < 0;
-};
+const isNumeric = (number) => typeof number === 'number' && Number.isFinite(number);
 
 /**
  * Функция генерирует случайное положительное число в заданном диапазоне
@@ -24,7 +14,11 @@ const isNotNegativeNumber = (number) => {
  */
 const getRandomPositiveNumber = (start, end) => {
   // Валидация переданных параметров
-  if (isNotNegativeNumber(start) && isNotNegativeNumber(end)) {
+  if (!isNumeric(start) || start < 0) {
+    return NaN;
+  }
+
+  if (!isNumeric(end) || end < 0) {
     return NaN;
   }
 
