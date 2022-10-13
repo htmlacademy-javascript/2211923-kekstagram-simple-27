@@ -14,15 +14,10 @@ const isNumeric = (anyValue) => typeof anyValue === 'number' && Number.isFinite(
  */
 const getRandomPositiveNumber = (start, end) => {
   // Валидация переданных параметров
-  if (!isNumeric(start) || start < 0) {
-    return NaN;
-  }
+  const paramsIsNumeric = isNumeric(start) && isNumeric(end);
+  const paramsIsPositive = start >= 0 && end >= 0;
 
-  if (!isNumeric(end) || end < 0) {
-    return NaN;
-  }
-
-  if (Math.abs(start - end) < 1) {
+  if (!paramsIsNumeric || !paramsIsPositive || Math.abs(start - end) < 1) {
     return NaN;
   }
 
