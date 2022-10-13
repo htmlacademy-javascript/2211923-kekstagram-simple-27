@@ -61,7 +61,15 @@ const descriptions = [
  * @returns случайны элемент
  */
 const getRandomArrayElement = (array) => {
-  const index = getRandomPositiveNumber(0, array.length);
+  if (!Array.isArray(array) || array.length === 0) {
+    return undefined;
+  }
+
+  if (array.length === 1) {
+    return array[0];
+  }
+
+  const index = getRandomPositiveNumber(0, array.length - 1);
   return array[index];
 };
 
