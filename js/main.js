@@ -1,10 +1,10 @@
 /**
  * Функция проверяет валидность числа.
  * Объект должен быть конечным числом.
- * @param {Number} number проверяемое число
+ * @param {Number} anyValue проверяемое число
  * @returns является ли number числом
  */
-const isNumeric = (number) => typeof number === 'number' && Number.isFinite(number);
+const isNumeric = (anyValue) => typeof anyValue === 'number' && Number.isFinite(anyValue);
 
 /**
  * Функция генерирует случайное положительное число в заданном диапазоне
@@ -19,6 +19,10 @@ const getRandomPositiveNumber = (start, end) => {
   }
 
   if (!isNumeric(end) || end < 0) {
+    return NaN;
+  }
+
+  if (Math.abs(start - end) < 1) {
     return NaN;
   }
 
