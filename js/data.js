@@ -37,4 +37,4 @@ const PICTURES_NUMBER = 25;
 const getRandomPictures = () =>
   Array.from({length: PICTURES_NUMBER}, (_, index) => createPicture(index + 1));
 
-export {getRandomPictures};
+export { getRandomPictures };
