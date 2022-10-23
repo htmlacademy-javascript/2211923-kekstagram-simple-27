@@ -27,6 +27,10 @@ const createPictureElement = ({url, likes, comments}) => {
  * @param {Array} pictures список изображений
  */
 const renderPictures = (pictures) => {
+  if (!Array.isArray(pictures)) {
+    return undefined;
+  }
+
   // Контейнер списка элементов
   const picturesListFragment = document.createDocumentFragment();
 
