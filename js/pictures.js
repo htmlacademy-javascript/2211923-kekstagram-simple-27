@@ -39,7 +39,7 @@ const renderPictures = (pictures) => {
 
   // Добавление списка на страницу
   picturesListFragment.append(...elements);
-  picturesListElement.appendChild(picturesListFragment);
+  picturesListElement.append(picturesListFragment);
 };
 
 export { renderPictures };
