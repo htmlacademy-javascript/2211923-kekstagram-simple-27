@@ -53,8 +53,28 @@ const getRandomArrayElement = (array) => {
   return array[index];
 };
 
+// Объект для работы с событиями
+const EventHelper = {
+  /**
+   * Функция проверяет нажатие клавиши Escape пользователем
+   * @param {Object} event событие
+   * @param {String} event.key нажатая клавиша
+   * @returns Является ли событие нажатием Escape
+   */
+  isEscapeKey: ({key}) => key === 'Escape',
+
+  /**
+   * Функция проверяет нажатие клавиши Enter пользователем
+   * @param {Object} event событие
+   * @param {String} event.key нажатая клавиша
+   * @returns Является ли событие нажатием Enter
+   */
+  isEnterKey: ({key}) => key === 'Enter'
+};
+
 export {
   getRandomPositiveNumber,
   getRandomArrayElement,
   validateTextLength,
+  EventHelper
 };
