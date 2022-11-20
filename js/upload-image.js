@@ -11,6 +11,7 @@ const btnSmaller = document.querySelector('.scale__control--smaller');
 const btnBigger = document.querySelector('.scale__control--bigger');
 const scaleValue = document.querySelector('.scale__control--value');
 
+// Slider controls
 const effectsContainer = document.querySelector('.img-upload__effects');
 const sliderElement = document.querySelector('.effect-level__slider');
 const sliderValue = document.querySelector('.effect-level__value');
@@ -68,56 +69,69 @@ const PhotoEditOptions = {
   }
 };
 
-btnSmaller.addEventListener('click', () => {
-  const currentValue = parseInt(scaleValue.value, 10);
-  if (currentValue > PhotoEditOptions.scale.min) {
-    const newValue = currentValue - PhotoEditOptions.scale.step;
+const updateScale = (value) => {
+  const intScaleValue = parseInt(scaleValue.value, 10);
+  const newValue = intScaleValue + value;
+
+  const {min, max} = PhotoEditOptions.scale;
+
+  if (newValue >= min && newValue <= max) {
     scaleValue.value = `${newValue}%`;
     imagePreview.style.transform = `scale(${newValue / 100})`;
   }
+};
+
+btnSmaller.addEventListener('click', () => {
+  updateScale(-PhotoEditOptions.scale.step);
 });
 
 btnBigger.addEventListener('click', () => {
-  const currentValue = parseInt(scaleValue.value, 10);
-  if (currentValue < PhotoEditOptions.scale.max) {
-    const newValue = currentValue + PhotoEditOptions.scale.step;
-    scaleValue.value = `${newValue}%`;
-    imagePreview.style.transform = `scale(${newValue / 100})`;
-  }
+  updateScale(PhotoEditOptions.scale.step);
 });
 
 const resetSlider = () => {
+  // Reset preview styling
+  imagePreview.classList = '';
+  imagePreview.style = null;
+
+  // Destroy slider
   if (sliderElement.noUiSlider) {
     sliderElement.noUiSlider.destroy();
   }
 };
 
+const updateSlider = (options) => {
+  if (sliderElement.noUiSlider) {
+    sliderElement.noUiSlider.updateOptions(options);
+  } else {
+    noUiSlider.create(sliderElement, options);
+  }
+};
+
 effectsContainer.addEventListener('change', (evt) => {
   const effect = evt.target.value;
-  if (effect in PhotoEditOptions.effects) {
-    imagePreview.classList = `effects__preview--${effect}`;
+  const effectOptions = PhotoEditOptions.effects[effect];
 
-    const options = {
-      ...PhotoEditOptions.effects[effect],
-      connect: 'upper',
-      start: PhotoEditOptions.effects[effect].range.max
-    };
-
-    if (sliderElement.noUiSlider) {
-      sliderElement.noUiSlider.updateOptions(options);
-    } else {
-      noUiSlider.create(sliderElement, options);
-    }
-
-    sliderElement.noUiSlider.off('update');
-    sliderElement.noUiSlider.on('update', () => {
-      sliderValue.value = sliderElement.noUiSlider.get();
-      imagePreview.style.filter = `${options.effect}(${sliderValue.value}${options.prefix || ''})`;
-    });
-  } else {
-    imagePreview.classList = '';
+  if (!effectOptions) {
     resetSlider();
+    return;
   }
+
+  imagePreview.className = `effects__preview--${effect}`;
+
+  const options = {
+    ...effectOptions,
+    connect: 'upper',
+    start: effectOptions.range.max
+  };
+  updateSlider(options);
+
+  const slider = sliderElement.noUiSlider;
+  slider.off('update');
+  slider.on('update', () => {
+    sliderValue.value = slider.get();
+    imagePreview.style.filter = `${options.effect}(${sliderValue.value}${options.prefix || ''})`;
+  });
 });
 
 const resetForm = () => {
