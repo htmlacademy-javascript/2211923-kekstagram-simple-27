@@ -43,6 +43,7 @@ const EFFECTS = {
     effect: 'brightness'
   },
 };
+
 const DEFAULT_EFFECT = 'none';
 
 /**
