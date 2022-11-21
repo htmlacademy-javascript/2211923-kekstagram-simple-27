@@ -1,9 +1,17 @@
 import { EventHelper } from './util.js';
+import { resetScale } from './scale.js';
+import { resetEffects } from './effects.js';
 
 const fileField = document.querySelector('#upload-file');
 const cancelBtn = document.querySelector('.img-upload__cancel');
 const editModal = document.querySelector('.img-upload__overlay');
 const uploadForm = document.querySelector('#upload-select-image');
+
+const resetForm = () => {
+  uploadForm.reset();
+  resetScale();
+  resetEffects();
+};
 
 const PhotoModal = {
   onEscapeKeyDown: (evt) => {
@@ -16,7 +24,7 @@ const PhotoModal = {
     editModal.classList.add('hidden');
     document.body.classList.remove('modal-open');
 
-    uploadForm.reset();
+    resetForm();
 
     document.removeEventListener('keydown', PhotoModal.onEscapeKeyDown);
   },
