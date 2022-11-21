@@ -84,7 +84,7 @@ const getSliderOptions = (name) => {
 let currentEffect = DEFAULT_EFFECT;
 
 // Создание слайдера
-noUiSlider.create(sliderElement, getSliderOptions('none'));
+noUiSlider.create(sliderElement, getSliderOptions(DEFAULT_EFFECT));
 
 // Сокрытие слайдера по умолчанию
 sliderElement.classList.add('hidden');
