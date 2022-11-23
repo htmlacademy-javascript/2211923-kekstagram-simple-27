@@ -3,6 +3,7 @@ const effectsContainer = document.querySelector('.img-upload__effects');
 const sliderElement = document.querySelector('.effect-level__slider');
 const sliderValue = document.querySelector('.effect-level__value');
 
+// Набор эффектов
 const EFFECTS = {
   'none': {
     min: 0,
@@ -43,6 +44,7 @@ const EFFECTS = {
   },
 };
 
+// По умолчанию эффект не выбран
 const DEFAULT_EFFECT = 'none';
 
 /**

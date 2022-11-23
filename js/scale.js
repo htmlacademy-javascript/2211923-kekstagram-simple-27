@@ -3,12 +3,14 @@ const btnSmaller = document.querySelector('.scale__control--smaller');
 const btnBigger = document.querySelector('.scale__control--bigger');
 const scaleValue = document.querySelector('.scale__control--value');
 
+// Настройки масштабирования
 const SCALE_OPTIONS = {
   step: 25,
   min: 25,
   max: 100
 };
 
+// По умолчанию максимальный размер
 const DEFAULT_SCALE = SCALE_OPTIONS.max;
 
 /**

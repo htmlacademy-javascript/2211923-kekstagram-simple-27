@@ -8,6 +8,13 @@ const errorTemplate = document.querySelector('#error')
   .content
   .querySelector('.error');
 
+/**
+ * Функция для проверки, что элемент:
+ * - область вне блока сообщения
+ * - кнопка закрытия блока сообщения
+ * @param {HTMLElement} element проверяемый элемент
+ * @returns нужно ли закрыть при нажатии по элементу
+ */
 const isBlockForClose = (element) => {
   const classList = [
     'success',
@@ -18,17 +25,27 @@ const isBlockForClose = (element) => {
   return classList.some((className) => element.classList.contains(className));
 };
 
+/**
+ * Отображение элемента с добавление обработчиков
+ * @param {HTMLElement} messageBlock блок сообщения
+ */
 const createMessage = (messageBlock) => {
+  /**
+   * Функция закрытия сообщения
+   */
   const closeMessage = () => {
     messageBlock.remove();
   };
 
+  // Закрытие блока при клике по кнопке или пустой области
   messageBlock.addEventListener('click', (evt) => {
     if (isBlockForClose(evt.target)) {
       closeMessage();
     }
   });
 
+  //TODO: удалять обработчик при закрытии блока
+  // Закрытие блока при нажатии клавиши ESC
   document.addEventListener('keydown', (evt) => {
     if (EventHelper.isEscapeKey(evt)) {
       closeMessage();
@@ -38,16 +55,26 @@ const createMessage = (messageBlock) => {
   document.body.append(messageBlock);
 };
 
+/**
+ * Создание сообщения об успешной операции
+ */
 const createSuccessMessage = () => {
   const successMessage = successTemplate.cloneNode(true);
   createMessage(successMessage);
 };
 
+/**
+ * Создание сообщения об ошибки при выполнении операции
+ */
 const createErrorMessage = () => {
   const errorMessage = errorTemplate.cloneNode(true);
   createMessage(errorMessage);
 };
 
+/**
+ * Показать сообщение в специальном блоке
+ * @param {String} message сообщение
+ */
 const showErrorToast = (message) => {
   const toast = document.createElement('div');
   toast.textContent = message;
@@ -64,6 +91,10 @@ const showErrorToast = (message) => {
   setTimeout(() => toast.remove(), 3000);
 };
 
+/**
+ * Проверка наличия сообщения об ошибке или успехе на странице
+ * @returns есть ли сообщения на странице
+ */
 const messageIsShown = () => document.querySelector('.success') || document.querySelector('.error');
 
 export { createSuccessMessage, createErrorMessage, messageIsShown, showErrorToast };
