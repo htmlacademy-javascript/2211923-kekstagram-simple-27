@@ -2,6 +2,12 @@ import { sendData } from './api.js';
 import { createErrorMessage, createSuccessMessage } from './message.js';
 
 const uploadForm = document.querySelector('#upload-select-image');
+const formSubmit = document.querySelector('.img-upload__submit');
+
+const pristine = new Pristine(uploadForm, {
+  classTo: 'img-upload__text',
+  errorTextParent: 'img-upload__text',
+});
 
 /**
  * Функция инициализации обработчиков событий формы с пользовательской логикой.
@@ -11,11 +17,16 @@ const uploadForm = document.querySelector('#upload-select-image');
 const initForm = (onSubmit) => {
   uploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
+    if (!pristine.validate()) {
+      return;
+    }
 
+    formSubmit.setAttribute('disabled', true);
     sendData(
       () => {
         onSubmit();
         createSuccessMessage();
+        formSubmit.setAttribute('disabled', false);
       },
       createErrorMessage,
       new FormData(evt.target)
