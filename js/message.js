@@ -30,27 +30,35 @@ const isBlockForClose = (element) => {
  * @param {HTMLElement} messageBlock блок сообщения
  */
 const createMessage = (messageBlock) => {
-  /**
-   * Функция закрытия сообщения
-   */
-  const closeMessage = () => {
-    messageBlock.remove();
+
+  const MessageWorker = {
+    /**
+     * Функция закрытия сообщения
+     */
+    closeMessage() {
+      messageBlock.remove();
+      document.removeEventListener('keydown', MessageWorker.onEscKeyDown);
+    },
+
+    /**
+     * Обработчик нажатия клавиши ESC
+     */
+    onEscKeyDown(evt) {
+      if (EventHelper.isEscapeKey(evt)) {
+        MessageWorker.closeMessage();
+      }
+    }
   };
 
   // Закрытие блока при клике по кнопке или пустой области
   messageBlock.addEventListener('click', (evt) => {
     if (isBlockForClose(evt.target)) {
-      closeMessage();
+      MessageWorker.closeMessage();
     }
   });
 
-  //TODO: удалять обработчик при закрытии блока
   // Закрытие блока при нажатии клавиши ESC
-  document.addEventListener('keydown', (evt) => {
-    if (EventHelper.isEscapeKey(evt)) {
-      closeMessage();
-    }
-  });
+  document.addEventListener('keydown', MessageWorker.onEscKeyDown);
 
   document.body.append(messageBlock);
 };
