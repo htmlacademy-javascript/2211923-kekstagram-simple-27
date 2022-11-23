@@ -1,5 +1,7 @@
 import { getRandomArrayElement, getRandomPositiveNumber } from './util.js';
 
+const PICTURES_NUMBER = 25;
+
 // Набор описаний изображений для генерации данных
 // Источник: https://rusability.ru/pfanshtil/200-fraz-podpisei-k-foto-i-selfi-v-sotssetyah/5fd295882dda593c3483dffb
 const descriptions = [
@@ -27,8 +29,6 @@ const createPicture = (index) => ({
   likes: getRandomPositiveNumber(15, 200),
   comments: getRandomPositiveNumber(0, 200),
 });
-
-const PICTURES_NUMBER = 25;
 
 /**
  * Функция генерирует массив случайных изображений
