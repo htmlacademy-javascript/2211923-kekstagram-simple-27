@@ -106,7 +106,16 @@
 
                 <!-- Добавление комментария к изображению -->
                 <fieldset class="img-upload__text text">
-                    <textarea class="text__description" name="description" placeholder="Ваш комментарий..." minlength="20" maxlength="140" required></textarea>
+                    <textarea 
+                      class="text__description" 
+                      name="description" 
+                      placeholder="Ваш комментарий..." 
+                      minlength="20"
+                      maxlength="140" 
+                      required
+                      data-pristine-required-message="Комментарий является обязательным"
+                      data-pristine-minlength-message="Комментарий не должен быть менее 20 символов"
+                      data-pristine-maxlength-message="Комментарий не должен быть более 140 символов"></textarea>
                 </fieldset>
 
                 <!-- Кнопка для отправки данных на сервер -->
