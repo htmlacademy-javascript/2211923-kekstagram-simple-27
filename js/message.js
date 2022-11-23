@@ -15,7 +15,7 @@ const errorTemplate = document.querySelector('#error')
  * @param {HTMLElement} element проверяемый элемент
  * @returns нужно ли закрыть при нажатии по элементу
  */
-const isBlockForClose = (element) => {
+const checkIsElementForClose = (element) => {
   const classList = [
     'success',
     'success__button',
@@ -52,7 +52,7 @@ const createMessage = (messageBlock) => {
 
   // Закрытие блока при клике по кнопке или пустой области
   messageBlock.addEventListener('click', (evt) => {
-    if (isBlockForClose(evt.target)) {
+    if (checkIsElementForClose(evt.target)) {
       MessageWorker.closeMessage();
     }
   });
