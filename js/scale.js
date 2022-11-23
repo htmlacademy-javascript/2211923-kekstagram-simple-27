@@ -1,5 +1,4 @@
 const imagePreview = document.querySelector('.img-upload__preview img');
-
 const btnSmaller = document.querySelector('.scale__control--smaller');
 const btnBigger = document.querySelector('.scale__control--bigger');
 const scaleValue = document.querySelector('.scale__control--value');
