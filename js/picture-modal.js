@@ -2,7 +2,7 @@ import { EventHelper } from './util.js';
 import { resetScale } from './scale.js';
 import { resetEffects } from './effects.js';
 import { resetForm, initForm } from './picture-form.js';
-import { messageIsShown } from './message.js';
+import { checkMessageIsShown } from './message.js';
 
 const pictureField = document.querySelector('#upload-file');
 const cancelButton = document.querySelector('.img-upload__cancel');
@@ -24,7 +24,7 @@ const PhotoModal = {
    * @param {Event} evt событие нажатия клавиши
    */
   onEscapeKeyDown: (evt) => {
-    if (EventHelper.isEscapeKey(evt) && !messageIsShown()) {
+    if (EventHelper.isEscapeKey(evt) && !checkMessageIsShown()) {
       PhotoModal.closeModal();
     }
   },
