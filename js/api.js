@@ -2,11 +2,17 @@ const BASE_URL = 'https://27.javascript.pages.academy/kekstagram-simple';
 
 const getData = (onSuccess, onFail) => {
   fetch(`${BASE_URL}/data`)
-    .then((response) => response.json())
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+
+      throw new Error(`${response.status} ${response.statusText}`);
+    })
     .then((pictures) => {
       onSuccess(pictures);
     })
-    .catch((err) => onFail(err));
+    .catch((err) => onFail(`Ошибка при загрузке данных: ${err.message}`));
 };
 
 const sendData = (onSuccess, onFail, body) => {
@@ -23,7 +29,7 @@ const sendData = (onSuccess, onFail, body) => {
         return;
       }
 
-      throw new Error(`${response.status} ${response.err}`);
+      throw new Error(`${response.status} ${response.statusText}`);
     })
     .catch((err) => {
       onFail(`Ошибка при отправке данных: ${err}`);
