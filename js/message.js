@@ -16,13 +16,13 @@ const errorTemplate = document.querySelector('#error')
  * @returns нужно ли закрыть при нажатии по элементу
  */
 const checkIsElementForClose = (element) => {
-  const classList = [
+  const classNames = [
     'success',
     'success__button',
     'error',
     'error__button',
   ];
-  return classList.some((className) => element.classList.contains(className));
+  return classNames.some((className) => element.classList.contains(className));
 };
 
 /**
@@ -103,6 +103,6 @@ const showErrorToast = (message) => {
  * Проверка наличия сообщения об ошибке или успехе на странице
  * @returns есть ли сообщения на странице
  */
-const messageIsShown = () => document.querySelector('.success') || document.querySelector('.error');
+const checkMessageIsShown = () => document.querySelector('.success') || document.querySelector('.error');
 
-export { createSuccessMessage, createErrorMessage, messageIsShown, showErrorToast };
+export { createSuccessMessage, createErrorMessage, checkMessageIsShown, showErrorToast };
